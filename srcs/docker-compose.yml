@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+	mariadb:
+		build: ./requirements/mariadb
+		volumes:
+			- db-data:/var/lib/mysql
+		environment:
+			MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+			MYSQL_DATABASE: ${MYSQL_DATABASE}
+			MYSQL_USER: ${MYSQL_USER}
+			MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+		restart: always
+		networks:
+			- database
+
+	wordpress:
+		build: ./requirements/wordpress
+		volumes:
+			- wp-data:/var/www/html/wordpress
+		depends_on:
+			- maraiadb
+		environment:
+			WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
+			WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+			WORDPRESS_DB_USER: ${MYSQL_USER}
+			WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+			WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+		restart: always
+		networks:
+			- proxy
+			- database
+
+	nginx:
+		build: ./requirements/nginx
+		volumes:
+			- wp-data:/var/www/html/wordpress
+		ports:
+			- 443
+		networks:
+			- proxy
+
+networks:
+	proxy:
+	database:
+
+volumes:
+	wp-data:
+		driver: local
+		driver_opts:
+			type: none
+			o: bind
+			device: /home/prrattan/data/wordpress
+	db-data:
+		driver: local
+		driver_opts:
+			type: none
+			o: bind
+			device: /home/prrattan/data/mariadb
