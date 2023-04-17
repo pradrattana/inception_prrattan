@@ -15,15 +15,20 @@ RUN apt-get update \
 		php-xml \
 		php-zip \
 		php-fpm \
-	&& rm -rf /var/lib/apt/lists/* \
-	&& curl -o wordpress.tar.gz -kL https://wordpress.org/wordpress-6.2.tar.gz \
-	&& tar -xzf wordpress.tar.gz -C /usr/src/ \
-	&& rm wordpress.tar.gz
+	&& rm -rf /var/lib/apt/lists/*
 
-COPY conf/wp-config.php /usr/src/wordpress
+WORKDIR /var/www/html
+
+RUN curl -o wordpress.tar.gz -kL https://wordpress.org/wordpress-6.2.tar.gz \
+	&& tar -xzf wordpress.tar.gz \
+	&& mv wordpress/* . \
+	&& rm -rf wordpress wordpress.tar.gz
+
+COPY conf/wp-config.php .
+COPY conf/www.conf /etc/php/7.3/fpm/pool.d
 
 RUN mkdir -p /var/run/php \
-	&& chown -R www-data:www-data /usr/src/wordpress /var/run/php \
+	&& chown -R www-data:www-data /var/www/html /var/run/php \
 	&& chmod 777 /var/run/php
 
 VOLUME /var/www/html

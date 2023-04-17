@@ -41,7 +41,7 @@ services:
     volumes:
       - wp-data:/var/www/html
     ports:
-      - 443
+      - "443:443"
     networks:
       - proxy
 

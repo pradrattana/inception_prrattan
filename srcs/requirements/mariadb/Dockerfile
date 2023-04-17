@@ -5,18 +5,17 @@ RUN apt-get update \
 		mariadb-server \
 		mariadb-client \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /var/lib/mysql \
-	&& mkdir -p /var/lib/mysql /var/run/mysqld \
+	&& mkdir -p /var/run/mysqld \
 	&& chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
 	&& chmod 777 /var/run/mysqld
 
 VOLUME /var/lib/mysql
 
-# COPY conf/.cnf /etc/mysql
-COPY tools/docker-entrypoint.sh /usr/local/bin/
+COPY conf/my.cnf /etc/mysql/mariadb.conf.d
+COPY tools/mariadb-docker-entrypoint.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+RUN chmod +x /usr/local/bin/mariadb-docker-entrypoint.sh
+ENTRYPOINT ["bash", "/usr/local/bin/mariadb-docker-entrypoint.sh"]
 
 EXPOSE 3306
 
