@@ -10,13 +10,13 @@ RUN apt-get update \
 	&& chmod 777 /var/run/mysqld
 
 VOLUME /var/lib/mysql
+EXPOSE 3306
 
-COPY conf/my.cnf /etc/mysql/mariadb.conf.d
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d
 COPY tools/mariadb-docker-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/mariadb-docker-entrypoint.sh
 ENTRYPOINT ["bash", "/usr/local/bin/mariadb-docker-entrypoint.sh"]
 
-EXPOSE 3306
-
-CMD ["mysqld"]
+#CMD ["service", "mysql", "start"]
+#CMD ["mysqld"]

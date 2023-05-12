@@ -3,7 +3,6 @@ FROM debian:buster
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
 		curl \
-		default-mysql-client \
 		php \
 		php-json \
 		php-mysqli \
@@ -16,10 +15,17 @@ RUN apt-get update \
 		php-xml \
 		php-zip \
 		php-fpm \
-		ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /var/www/html
+
+RUN curl -o wordpress.tar.gz -kL https://wordpress.org/wordpress-6.2.tar.gz \
+	&& tar -xzf wordpress.tar.gz \
+	&& mv wordpress/* . \
+	&& rm -rf wordpress wordpress.tar.gz
+
+COPY conf/wp-config.php .
+COPY conf/www.conf /etc/php/7.3/fpm/pool.d
 
 RUN mkdir -p /var/run/php \
 	&& chown -R www-data:www-data /var/www/html /var/run/php \
@@ -29,11 +35,4 @@ VOLUME /var/www/html
 
 EXPOSE 9000
 
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d
-#COPY conf/wp-config.php ..
-COPY tools/wordpress-docker-entrypoint.sh /usr/local/bin/
-
-RUN chmod +x /usr/local/bin/wordpress-docker-entrypoint.sh
-ENTRYPOINT ["bash", "/usr/local/bin/wordpress-docker-entrypoint.sh"]
-
-#CMD ["/usr/sbin/php-fpm7.3", "-F"]
+CMD ["/usr/sbin/php-fpm7.3", "-F"]
