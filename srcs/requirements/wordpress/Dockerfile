@@ -21,9 +21,9 @@ RUN apt-get update \
 
 WORKDIR /var/www/html
 
-RUN mkdir -p /var/run/php \
-	&& chown -R www-data:www-data /var/www/html /var/run/php \
-	&& chmod 777 /var/run/php
+RUN mkdir -p /run/php \
+	&& chown -R www-data:www-data /var/www/html /run/php \
+	&& chmod 777 /run/php
 
 VOLUME /var/www/html
 

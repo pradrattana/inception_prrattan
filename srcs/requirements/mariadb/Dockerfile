@@ -5,9 +5,9 @@ RUN apt-get update \
 		mariadb-server \
 		mariadb-client \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& mkdir -p /var/run/mysqld \
-	&& chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
-	&& chmod 777 /var/run/mysqld
+	&& mkdir -p /run/mysqld \
+	&& chown -R mysql:mysql /var/lib/mysql /run/mysqld \
+	&& chmod 777 /run/mysqld
 
 VOLUME /var/lib/mysql
 EXPOSE 3306

@@ -14,7 +14,7 @@ wp config set WP_DEBUG_LOG true --allow-root --raw
 #wp db create --allow-root
 #wp user create $WORDPRESS_DB_USER $WORDPRESS_EMAIL --allow-root --user_pass=$WORDPRESS_DB_PASSWORD
 
-wp core install --allow-root --url=$DOMAIN_NAME --title=inception --admin_user=$WORDPRESS_DB_USER --admin_password=$WORDPRESS_DB_PASSWORD --admin_email=$WORDPRESS_EMAIL --skip-email
+wp core install --allow-root --url=$DOMAIN_NAME --title=inception --admin_user=$ADMIN_USER --admin_password=$ADMIN_PASSWORD --admin_email=$ADMIN_EMAIL --skip-email
 
 wp theme install twentytwentytwo --allow-root --activate
 #wp plugin deactivate --allow-root --all
