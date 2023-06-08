@@ -23,17 +23,15 @@ WORKDIR /var/www/html
 
 RUN mkdir -p /run/php \
 	&& chown -R www-data:www-data /var/www/html /run/php \
-	&& chmod 777 /run/php
+	&& chmod 755 /run/php
 
 VOLUME /var/www/html
 
 EXPOSE 9000
 
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d
-#COPY conf/wp-config.php ..
 COPY tools/wordpress-docker-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/wordpress-docker-entrypoint.sh
-ENTRYPOINT ["bash", "/usr/local/bin/wordpress-docker-entrypoint.sh"]
 
-#CMD ["/usr/sbin/php-fpm7.3", "-F"]
+ENTRYPOINT ["bash", "/usr/local/bin/wordpress-docker-entrypoint.sh"]
