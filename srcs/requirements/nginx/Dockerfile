@@ -5,16 +5,14 @@ RUN apt-get update \
 		nginx \
 		openssl \
 	&& rm -rf /var/lib/apt/lists/* \
-#	&& mkdir -p /run/nginx \
-#	&& chmod 755 /run/nginx \
 	&& mkdir -p /etc/nginx/ssl \
 	&& openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
 		-keyout /etc/nginx/ssl/prrattan.42.fr.key \
 		-subj "/C=TH/ST=Bangkok/L=Bangkok/O=42Bangkok/OU=IT/CN=prrattan.42.fr" \
 		-out /etc/nginx/ssl/prrattan.42.fr.crt
 
-COPY conf/prrattan.42.fr.conf /etc/nginx/conf.d
-
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+COPY conf/prrattan.42.fr.conf /etc/nginx/conf.d
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

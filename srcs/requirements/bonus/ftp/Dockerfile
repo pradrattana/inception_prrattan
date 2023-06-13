@@ -5,13 +5,10 @@ RUN apt-get update \
 		vsftpd \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir -p /var/www/html
-#	&& mkdir -p /run/redis
-#	&& chmod 755 /run/nginx \
 
-#VOLUME /var/www/html
+VOLUME /var/www/html
 
 COPY conf/vsftpd.conf /etc
-
 COPY tools/ftp-docker-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/ftp-docker-entrypoint.sh

@@ -23,17 +23,18 @@ services:
     volumes:
       - wp-data:/var/www/html
     environment:
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
-      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       DOMAIN_NAME: ${DOMAIN_NAME}
+      WP_DB_NAME: ${MYSQL_DATABASE}
+      WP_DB_USER: ${MYSQL_USER}
+      WP_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WP_DB_HOST: ${WP_DB_HOST}
       ADMIN_USER: ${ADMIN_USER}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       ANOTHER_USER: ${ANOTHER_USER}
       ANOTHER_EMAIL: ${ANOTHER_EMAIL}
       ANOTHER_PASSWORD: ${ANOTHER_PASSWORD}
+      REDIS_HOST: ${REDIS_HOST}
     restart: always
     networks:
       - proxy
