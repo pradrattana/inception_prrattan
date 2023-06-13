@@ -47,7 +47,34 @@ services:
     volumes:
       - wp-data:/var/www/html
     ports:
-      - "443:443"
+      - '443:443'
+    networks:
+      - proxy
+
+  redis:
+    container_name: redis
+    depends_on:
+      - wordpress
+    build: ./requirements/bonus/redis
+    ports:
+      - '6379:6379'
+    restart: always
+    networks:
+      - proxy
+
+  ftp:
+    container_name: ftp
+    build: ./requirements/bonus/ftp
+    volumes:
+      - wp-data:/var/www/html
+    ports:
+      - '20:20'
+      - '21:21'
+      - '10000-10100:10000-10100'
+    environment:
+      FTP_USER: ${FTP_USER}
+      FTP_PASSWORD: ${FTP_PASSWORD}
+    restart: always
     networks:
       - proxy
 
@@ -62,6 +89,7 @@ volumes:
       type: none
       o: bind
       device: /home/prrattan/data/wordpress
+
   db-data:
     driver: local
     driver_opts:

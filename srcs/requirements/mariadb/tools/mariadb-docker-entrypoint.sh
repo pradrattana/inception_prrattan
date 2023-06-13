@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#service mysql start
-
 if [ ! -d "/var/lib/mysql/$MYSQL_DATABASE" ]
 then
 
@@ -14,14 +12,11 @@ echo "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';" >> in
 echo "FLUSH PRIVILEGES;" >> init.sql
 
 mysql -uroot < init.sql
-#mysql -uroot -p$MYSQL_ROOT_PASSWORD < init.sql
 
 rm init.sql
 
 service mysql stop
 
 fi
-
-#service mysql stop
 
 mysqld
