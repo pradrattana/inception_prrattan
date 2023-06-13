@@ -13,7 +13,7 @@ wp config create --allow-root --dbname=$WP_DB_NAME --dbuser=$WP_DB_USER --dbpass
 # redis
 wp config set WP_CACHE true --allow-root --raw
 wp config set WP_CACHE_KEY_SALT $DOMAIN_NAME --allow-root
-wp config set WP_REDIS_HOST $WP_REDIS_HOST --allow-root
+wp config set WP_REDIS_HOST $REDIS_HOST --allow-root
 wp config set WP_REDIS_PORT 6379 --allow-root --raw
 # end redis
 
