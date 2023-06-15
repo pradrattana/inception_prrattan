@@ -13,7 +13,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     restart: always
     networks:
-      - database
+      - inception-net
 
   wordpress:
     container_name: wordpress
@@ -37,8 +37,7 @@ services:
       REDIS_HOST: ${REDIS_HOST}
     restart: always
     networks:
-      - proxy
-      - database
+      - inception-net
 
   nginx:
     container_name: nginx
@@ -51,7 +50,7 @@ services:
       - '443:443'
     restart: always
     networks:
-      - proxy
+      - inception-net
 
   redis:
     container_name: redis
@@ -62,7 +61,7 @@ services:
       - '6379:6379'
     restart: always
     networks:
-      - proxy
+      - inception-net
 
   ftp:
     container_name: ftp
@@ -78,11 +77,21 @@ services:
       FTP_PASSWORD: ${FTP_PASSWORD}
     restart: always
     networks:
-      - proxy
+      - inception-net
+
+  adminer:
+    container_name: adminer
+    depends_on:
+      - mariadb
+    build: ./requirements/bonus/adminer
+    ports:
+      - '8080:8080'
+    restart: always
+    networks:
+      - inception-net
 
 networks:
-  proxy:
-  database:
+  inception-net:
 
 volumes:
   wp-data:

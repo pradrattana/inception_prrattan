@@ -26,11 +26,6 @@ wp plugin install redis-cache --allow-root --activate
 wp redis enable --allow-root
 # end redis
 
-# adminer
-curl -LOk http://www.adminer.org/latest.php
-mv latest.php adminer.php
-# end adminer
-
 fi
 
 php-fpm7.3 -F
