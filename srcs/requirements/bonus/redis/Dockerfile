@@ -7,7 +7,7 @@ RUN apt-get update \
 
 COPY conf/redis.conf /etc/redis
 
-EXPOSE 6379
+#EXPOSE 6379
 
 ENTRYPOINT ["redis-server", "--protected-mode", "no"]
 

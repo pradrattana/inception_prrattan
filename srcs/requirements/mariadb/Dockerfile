@@ -11,7 +11,7 @@ RUN apt-get update \
 
 VOLUME /var/lib/mysql
 
-EXPOSE 3306
+#EXPOSE 3306
 
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d
 COPY tools/mariadb-docker-entrypoint.sh /usr/local/bin/

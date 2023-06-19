@@ -27,7 +27,7 @@ RUN mkdir -p /run/php \
 
 VOLUME /var/www/html
 
-EXPOSE 9000
+#EXPOSE 9000
 
 COPY conf/www.conf /etc/php/7.3/fpm/pool.d
 COPY tools/wordpress-docker-entrypoint.sh /usr/local/bin/

@@ -14,6 +14,6 @@ RUN chown -R www-data:www-data /var/www/html \
 	&& curl -LOk http://www.adminer.org/latest.php \
 	&& mv latest.php index.php
 
-EXPOSE 8080
+#EXPOSE 8080
 
 ENTRYPOINT ["php", "-S", "0.0.0.0:8080"]
