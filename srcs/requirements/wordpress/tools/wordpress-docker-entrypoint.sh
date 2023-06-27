@@ -28,4 +28,4 @@ wp redis enable --allow-root
 
 fi
 
-php-fpm7.3 -F
+php-fpm8.2 -F

@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -6,8 +6,6 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/*
 
 COPY conf/redis.conf /etc/redis
-
-#EXPOSE 6379
 
 ENTRYPOINT ["redis-server", "--protected-mode", "no"]
 

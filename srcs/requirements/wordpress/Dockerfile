@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 
 RUN apt-get update \
 	&& apt-get install -y --no-install-recommends \
@@ -29,7 +29,7 @@ VOLUME /var/www/html
 
 #EXPOSE 9000
 
-COPY conf/www.conf /etc/php/7.3/fpm/pool.d
+COPY conf/www.conf /etc/php/8.2/fpm/pool.d
 COPY tools/wordpress-docker-entrypoint.sh /usr/local/bin/
 
 RUN chmod +x /usr/local/bin/wordpress-docker-entrypoint.sh
