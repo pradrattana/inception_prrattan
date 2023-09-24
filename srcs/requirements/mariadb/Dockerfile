@@ -7,7 +7,7 @@ RUN apt-get update \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir -p /run/mysqld \
 	&& chown -R mysql:mysql /var/lib/mysql /run/mysqld \
-	&& chmod 755 /var/lib/mysql /run/mysqld
+	&& chmod 775 /var/lib/mysql /run/mysqld
 
 #VOLUME /var/lib/mysql
 

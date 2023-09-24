@@ -19,15 +19,8 @@ RUN apt-get update \
 		ca-certificates \
 	&& rm -rf /var/lib/apt/lists/*
 
-WORKDIR /var/www/html
-
-RUN mkdir -p /run/php \
-	&& chown -R www-data:www-data /var/www/html /run/php \
-	&& chmod 755 /run/php
-
-VOLUME /var/www/html
-
-#EXPOSE 9000
+RUN mkdir -p /var/www/html /run/php \
+	&& chmod 775 /var/www/html /run/php
 
 COPY conf/www.conf /etc/php/8.2/fpm/pool.d
 COPY tools/wordpress-docker-entrypoint.sh /usr/local/bin/

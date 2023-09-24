@@ -7,6 +7,8 @@ curl -LOk https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.p
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
 
+cd /var/www/html
+
 wp core download --allow-root --force
 wp config create --allow-root --dbname=$WP_DB_NAME --dbuser=$WP_DB_USER --dbpass=$WP_DB_PASSWORD --dbhost=$WP_DB_HOST
 
@@ -25,6 +27,8 @@ wp user create $ANOTHER_USER $ANOTHER_EMAIL --allow-root --user_pass=$ANOTHER_PA
 wp plugin install redis-cache --allow-root --activate
 wp redis enable --allow-root
 # end redis
+
+chown -R www-data:www-data /var/www/html
 
 fi
 

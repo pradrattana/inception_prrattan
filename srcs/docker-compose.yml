@@ -19,6 +19,7 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
+      - redis
     build: ./requirements/wordpress
     volumes:
       - wp-data:/var/www/html
@@ -54,8 +55,8 @@ services:
 
   redis:
     container_name: redis
-    depends_on:
-      - wordpress
+      #    depends_on:
+      #      - wordpress
     build: ./requirements/bonus/redis
     ports:
       - '6379:6379'
