@@ -9,10 +9,6 @@ RUN apt-get update \
 	&& chown -R mysql:mysql /var/lib/mysql /run/mysqld \
 	&& chmod 775 /var/lib/mysql /run/mysqld
 
-#VOLUME /var/lib/mysql
-
-#EXPOSE 3306
-
 COPY conf/mariadb.cnf /etc/mysql
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d
 COPY tools/mariadb-docker-entrypoint.sh /usr/local/bin/

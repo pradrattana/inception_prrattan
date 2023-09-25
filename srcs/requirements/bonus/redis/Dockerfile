@@ -8,4 +8,3 @@ RUN apt-get update \
 COPY conf/redis.conf /etc/redis
 
 ENTRYPOINT ["redis-server", "--protected-mode", "no"]
-
